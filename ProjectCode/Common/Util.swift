@@ -35,3 +35,10 @@ struct Version{
     static let iOS8 = (Version.SYS_VERSION_FLOAT >= 8.0 && Version.SYS_VERSION_FLOAT < 9.0)
     static let iOS9 = (Version.SYS_VERSION_FLOAT >= 9.0 && Version.SYS_VERSION_FLOAT < 10.0)
 }
+
+struct ColorUtil {
+    static let COLOR_TITLE = UIColor(red: CGFloat(24.0 / 255.0), green: CGFloat(131.0 / 255.0), blue: CGFloat(178.0 / 255.0), alpha: CGFloat(1))
+    static let COLOR_CONTENT = UIColor(red: CGFloat(183.0 / 255.0), green: CGFloat(183.0 / 255.0), blue: CGFloat(183.0 / 255.0), alpha: CGFloat(1))
+    static let COLOR_BACKGROUD = UIColor(red: CGFloat(24.0 / 255.0), green: CGFloat(131.0 / 255.0), blue: CGFloat(178.0 / 255.0), alpha: CGFloat(1))
+
+}
