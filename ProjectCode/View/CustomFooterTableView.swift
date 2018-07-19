@@ -10,13 +10,15 @@ import Foundation
 import UIKit
 
 class CustomFooterTableView: UITableViewHeaderFooterView {
-    var btnOrder: CustomButton!
+    var btnOrder: UIButton!
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        btnOrder = CustomButton(frame: .zero)
+        btnOrder = UIButton(frame: .zero)
         //let button = CustomButton() // also works
         btnOrder.setTitle("Order", for: .normal)
+        btnOrder.backgroundColor = ColorUtil.COLOR_BACKGROUD
+
         // auto layout
         btnOrder.translatesAutoresizingMaskIntoConstraints = false
         btnOrder.addTarget(self, action:#selector(actionButton), for: .touchUpInside)
@@ -41,23 +43,5 @@ class CustomFooterTableView: UITableViewHeaderFooterView {
        print("action button")
     }
 }
-import UIKit
 
-class CustomButton: UIButton {
-    
-    var myValue: Int
-    
-    override init(frame: CGRect) {
-        // set myValue before super.init is called
-        self.myValue = 0
-        super.init(frame: frame)
-        // set other operations after super.init, if required
-        backgroundColor = ColorUtil.COLOR_BACKGROUD
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
 

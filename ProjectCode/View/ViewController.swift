@@ -25,14 +25,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        array = NSMutableArray.init()
         listTopic = NSMutableArray.init()
-        
-        let keys = ["quantity", "name", "notes"]
-        let values = ["1", "SP4", "Good"]
-        
-        let dict = Dictionary(uniqueKeysWithValues: zip(keys, values))
-        array = NSMutableArray.init(object: dict)
+        for i in 0...5 {
+            let keys = ["quantity", "name", "notes"]
+            let values = ["\(i)", "SP\(i)", "Good"]
+            let dict = Dictionary(uniqueKeysWithValues: zip(keys, values))
+            array.add(dict)
+        }
+      
         products = [ // model
             Product(order_number: "2", received_time: "21m", staff_name: "SP1", number_of_guests: "3", array_Items: array),
             Product(order_number: "1", received_time: "20m", staff_name: "SP2", number_of_guests: "5", array_Items: array),
@@ -152,7 +153,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                     self.collectionview?.setCollectionViewLayout(aLayout, animated: true)
                     self.collectionview.reloadData()
                     self.collectionview.layoutIfNeeded()
-
                 }
             })
         }
@@ -191,8 +191,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 //        cell?.layer.borderColor = UIColor.gray.cgColor
         
         let padding: CGFloat =  50
-        let collectionViewSizeWidth = collectionview.frame.size.width - 10
-        let collectionViewSizeHeight = collectionview.frame.size.height - padding
+        var collectionViewSizeWidth = collectionview.frame.size.width - 10
+        var collectionViewSizeHeight = collectionview.frame.size.height - padding
+        if DeviceType.IS_IPAD || DeviceType.IS_IPAD_PRO {
+            collectionViewSizeWidth = collectionview.frame.size.width/2 - 10
+            collectionViewSizeHeight = collectionview.frame.size.height - padding
+        }
         for i in 0..<products.count {
             cell?.collectionScroll.contentSize = CGSize(width: CGFloat((i * Int(collectionViewSizeWidth)) + 170), height: CGFloat((collectionView.frame.size.height)))
         }
@@ -207,6 +211,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             cellView?.layer.borderWidth = 1.0
             cellView?.layer.borderColor = UIColor.gray.cgColor
             cellView?.products = listTopic[indexPath.row] as! [Product]
+            cellView?.tableView.frame = CGRect(x: 0, y: 0, width: (cellView?.frame.size.width)!, height: (cellView?.frame.size.height)!)
+            cellView?.tableView.backgroundColor = .red
+            cellView?.backgroundColor = .yellow
             cellView?.setupDataTable()
             cell?.collectionScroll.addSubview(cellView!)
         }

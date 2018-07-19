@@ -67,14 +67,14 @@ class ListDataSource: NSObject, UITableViewDataSource {
         self.products =  products
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return products.count
+        let product = products[0]
+        return product.array_Items.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        return 70
+        return 80
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 }
 
@@ -111,7 +111,7 @@ class ListDelegate: NSObject, UITableViewDelegate {
     //
     // MARK :- FOOTER
     
-    var sizeFooter:CGFloat = 40
+    var sizeFooter:CGFloat = 50
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
@@ -119,10 +119,10 @@ class ListDelegate: NSObject, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
         let viewForFooter = CustomFooterTableView()
-        viewForFooter.frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: sizeFooter)
+        viewForFooter.frame = CGRect(x: 0, y: tableView.frame.size.height-sizeFooter, width: tableView.frame.size.width, height: sizeFooter)
         viewForFooter.awakeFromNib()
+        viewForFooter.btnOrder.frame = viewForFooter.frame
         return viewForFooter
     }
     
